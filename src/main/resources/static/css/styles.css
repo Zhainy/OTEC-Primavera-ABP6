@@ -1,0 +1,364 @@
+/* =========================================
+   src/main/resources/static/css/styles.css
+   Estilo: EduTech Dark Cyan (SaaS Moderno)
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Paleta de colores EduTech */
+    --bg-main: #0b0f19;
+    --bg-surface: rgba(17, 24, 39, 0.7);
+    --glass-border: rgba(0, 229, 255, 0.15);
+
+    /* Acentos Cyan/Azul Neón */
+    --neon-blue: #00e5ff;
+    --neon-blue-hover: #00b3cc;
+    --neon-glow: 0 0 15px rgba(0, 229, 255, 0.3);
+
+    /* Estados */
+    --status-active: #10b981; /* Verde esmeralda */
+    --status-inactive: #ef4444; /* Rojo suave */
+
+    /* Texto */
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Inter es más estándar para dashboards SaaS */
+    background-color: var(--bg-main);
+    background-image: radial-gradient(circle at top right, #112230, #0b0f19 50%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Layout Principal --- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    flex: 1; /* Permite que el footer baje */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Navegación (Header) --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    color: var(--neon-blue);
+    font-size: 1.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.3s ease;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+    color: var(--neon-blue);
+}
+
+nav a.active {
+    color: var(--neon-blue);
+    border-bottom: 2px solid var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+}
+
+/* --- Contenedores (Cards) --- */
+.glass-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+.glass-card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.glass-card h2 i {
+    color: var(--neon-blue);
+}
+
+/* --- Estadísticas --- */
+
+.progress-container {
+    width: 100%;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    margin-top: 1rem;
+    overflow: hidden;
+    height: 12px;
+}
+.progress-bar {
+    height: 100%;
+    background-color: var(--neon-blue);
+    box-shadow: var(--neon-glow);
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--neon-blue);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    color: var(--neon-blue);
+    background: rgba(0, 229, 255, 0.1);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.stat-info h3 {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.stat-info p {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* --- Formularios --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.15);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.btn-primary {
+    background-color: var(--neon-blue);
+    color: #000; /* Contraste fuerte */
+    font-weight: 600;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    box-shadow: var(--neon-glow);
+}
+
+.btn-primary:hover {
+    background-color: var(--neon-blue-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+}
+
+/* --- Tablas --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+th {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+td {
+    font-size: 0.95rem;
+}
+
+tr:hover td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.badge.active {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--status-active);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge.inactive {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--status-inactive);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* --- Footer --- */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: auto;
+    border-top: 1px solid var(--glass-border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+/* --- Firma de Desarrolladora (Footer) --- */
+.dev-signature {
+    color: var(--neon-blue);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.dev-signature:hover {
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.8);
+}
+/* --- Página de Error --- */
+.error-container {
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.error-code {
+    font-size: 6rem;
+    font-weight: 700;
+    color: var(--neon-blue);
+    text-shadow: var(--neon-glow);
+    line-height: 1;
+    margin-bottom: 1rem;
+}

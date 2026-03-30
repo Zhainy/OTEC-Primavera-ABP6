@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Académico - OTEC Primavera</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="logo">
+            <i class="bi bi-hexagon-fill"></i> OTEC Primavera
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active"><i class="bi bi-grid-1x2"></i> Dashboard</a></li>
+                <li><a href="#"><i class="bi bi-journal-bookmark"></i> Cursos</a></li>
+                <li><a href="#"><i class="bi bi-people"></i> Alumnos</a></li>
+                <li><a href="#"><i class="bi bi-gear"></i> Configuración</a></li>
+            </ul>
+        </nav>
+        <div class="admin-profile">
+            <i class="bi bi-person-circle"></i>
+            <span>Administrador</span>
+        </div>
+    </header>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-journal-text"></i></div>
+            <div class="stat-info">
+                <h3>Cursos Activos</h3>
+                <p>12</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-person-badge"></i></div>
+            <div class="stat-info">
+                <h3>Alumnos Inscritos</h3>
+                <p>358</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="bi bi-graph-up-arrow"></i></div>
+            <div class="stat-info">
+                <h3>Tasa de Éxito</h3>
+                <p>91%</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="glass-card">
+        <h2><i class="bi bi-plus-circle-dotted"></i> Añadir Nuevo Programa</h2>
+
+        <form th:action="@{/admin/cursos/guardar}" th:object="${nuevoCurso}" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="nombre">Nombre del Programa</label>
+                    <input type="text" id="nombre" th:field="*{nombre}" required placeholder="Ej: Bootcamp Arquitectura Cloud">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción Técnica</label>
+                    <textarea id="descripcion" th:field="*{descripcion}" rows="2" placeholder="Detalla los módulos y objetivos del curso..."></textarea>
+                </div>
+            </div>
+            <div style="margin-top: 1.5rem; text-align: right;">
+                <button type="submit" class="btn-primary">
+                    <i class="bi bi-save"></i> Guardar Programa
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="glass-card">
+        <h2><i class="bi bi-list-ul"></i> Catálogo de Programas</h2>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Programa</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="curso : ${cursos}">
+                <td th:text="${'OT-' + curso.id}">OT-1</td>
+                <td th:text="${curso.nombre}" style="font-weight: 500; color: #fff;">Java Spring Boot</td>
+                <td th:text="${curso.descripcion}" style="color: var(--text-secondary);">Desc...</td>
+                <td>
+                    <span th:if="${curso.activo}" class="badge active"><i class="bi bi-check-circle-fill"></i> Activo</span>
+                    <span th:unless="${curso.activo}" class="badge inactive"><i class="bi bi-x-circle-fill"></i> Inactivo</span>
+                </td>
+                <td>
+                    <a href="@{/admin/cursos/editar/{id}(id=${curso.id})}" style="color: var(--text-secondary); margin-right: 10px;"><i class="bi bi-pencil-square"></i></a>
+                    <a href="@{/admin/cursos/eliminar/{id}(id=${curso.id})}" style="color: var(--status-inactive);"><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(cursos)}">
+                <td colspan="5" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+                    <i class="bi bi-inbox" style="font-size: 2rem; display: block; margin-bottom: 0.5rem;"></i>
+                    Aún no hay programas registrados en el sistema.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 OTEC Primavera. Sistema Integral de Gestión Académica. Desarrollado para evaluación final por <span class="dev-signature">Nicole Fernández</span>.</p>
+    </footer>
+</div>
+
+</body>
+</html>
