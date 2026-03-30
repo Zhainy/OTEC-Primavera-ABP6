@@ -1,6 +1,5 @@
 package com.otec.primavera.controllers;
 
-import com.otec.primavera.models.Matricula;
 import com.otec.primavera.models.Usuario;
 import com.otec.primavera.services.MatriculaService;
 import com.otec.primavera.services.UsuarioService;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/alumno")
@@ -23,12 +21,9 @@ public class AlumnoController {
 
     @GetMapping("/dashboard")
     public String verMiProgreso(Model model, Principal principal) {
-        /* * NOTA: 'Principal' es un objeto de Spring Security que nos dará el email del
-         * usuario que inició sesión. Lo dejaremos comentado hasta el Paso 7 (Seguridad).
-         * * Usuario alumno = usuarioService.buscarPorEmail(principal.getName());
-         * List<Matricula> misMatriculas = matriculaService.obtenerMatriculasPorAlumno(alumno);
-         * model.addAttribute("matriculas", misMatriculas);
-         */
+        Usuario alumno = usuarioService.buscarPorEmail(principal.getName());
+        model.addAttribute("nombreAlumno", alumno.getNombre());
+        model.addAttribute("matriculaActiva", matriculaService.obtenerMatriculaActiva(alumno).orElse(null));
 
         return "alumno/dashboard"; // Buscará templates/alumno/dashboard.html
     }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Mi Portal - OTEC Primavera</title>
@@ -11,30 +10,49 @@
 <div class="container">
     <header>
         <div class="logo"><i class="bi bi-hexagon-fill"></i> OTEC Primavera</div>
-        <div class="admin-profile">
-            <i class="bi bi-person-circle"></i> <span>Mi Perfil Estudiantil</span>
+        <div class="profile-menu">
+            <button type="button" class="admin-profile profile-trigger" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-person-circle"></i>
+                <span th:text="${nombreAlumno}">Mi Perfil Estudiantil</span>
+                <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="profile-dropdown">
+                <form th:action="@{/logout}" method="post">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <button type="submit" class="dropdown-link">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar sesion
+                    </button>
+                </form>
+            </div>
         </div>
     </header>
 
-    <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+    <div class="glass-card dashboard-narrow">
         <h2><i class="bi bi-mortarboard-fill"></i> Mi Programa Actual</h2>
 
-        <div style="background: rgba(0,0,0,0.3); padding: 2rem; border-radius: 8px; border: 1px solid var(--glass-border);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h3 style="color: var(--neon-blue); margin: 0;">Bootcamp Back-end Java</h3>
+        <div th:if="${matriculaActiva != null}" class="course-highlight">
+            <div class="course-head">
+                <h3 th:text="${matriculaActiva.curso.nombre}">Bootcamp Back-end Java</h3>
                 <span class="badge active">En Curso</span>
             </div>
-            <p style="color: var(--text-secondary); line-height: 1.6;">Estás cursando actualmente este programa. Recuerda revisar la plataforma de contenidos para tus próximas entregas.</p>
+            <p class="course-text" th:text="${matriculaActiva.curso.descripcion ?: 'Sigue avanzando en tu ruta de aprendizaje para completar este programa.'}">
+                Estas cursando actualmente este programa.
+            </p>
 
-            <div style="margin-top: 2rem;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600;">
+            <div class="progress-block">
+                <div class="progress-meta">
                     <span>Progreso General</span>
-                    <span style="color: var(--neon-blue);">45%</span>
+                    <span class="progress-value" th:text="${#numbers.formatDecimal(matriculaActiva.porcentajeProgreso, 1, 1)} + '%'">0%</span>
                 </div>
                 <div class="progress-container">
-                    <div class="progress-bar" style="width: 45%;"></div>
+                    <div class="progress-bar" th:style="'width:' + ${matriculaActiva.porcentajeProgreso} + '%;'"></div>
                 </div>
             </div>
+        </div>
+
+        <div th:if="${matriculaActiva == null}" class="table-empty">
+            <i class="bi bi-info-circle"></i>
+            Aun no tienes un curso en estado EN_CURSO.
         </div>
     </div>
 </div>

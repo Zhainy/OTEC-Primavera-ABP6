@@ -18,6 +18,10 @@ public class CursoService {
         return cursoRepository.findByActivoTrue();
     }
 
+    public long contarCursosActivos() {
+        return cursoRepository.countByActivoTrue();
+    }
+
     public Curso guardarCurso(Curso curso) {
         return cursoRepository.save(curso);
     }
