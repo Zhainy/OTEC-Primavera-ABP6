@@ -12,6 +12,22 @@
 
 ---
 
+## 🌐 Demo Online
+
+**Prueba la aplicación en vivo:**
+- 🔗 **URL de Producción**: [https://otec-primavera-abp6-production.up.railway.app/login](https://otec-primavera-abp6-production.up.railway.app/login)
+- 📦 **Alojado en**: Railway.app
+
+### Credenciales Demo Producción
+| Usuario | Email | Contraseña | Rol |
+|---------|-------|------------|-----|
+| Administrador | `admin@otec.cl` | `admin123` | ADMIN |
+| Estudiante | `alumno@otec.cl` | `alumno123` | ALUMNO |
+
+> ⚠️ **Nota**: Los datos son de demostración y se reinician con cada despliegue.
+
+---
+
 ## 📋 Descripción del Proyecto
 
 **OTEC Primavera** es una aplicación web desarrollada con **Spring Framework** para la gestión integral de procesos académicos en instituciones de formación técnica. Implementa un sistema completo de administración de cursos, alumnos y matrículas con autenticación segura y dashboards analíticos en tiempo real.
@@ -240,6 +256,55 @@ primavera/
 2. Ver su programa actual y progreso
 3. Visualizar estado de matrícula
 4. Cerrar sesión desde el menú de perfil
+
+---
+
+## 🚀 Deploy en Railway
+
+### Requisitos
+- Cuenta en [Railway.app](https://railway.app)
+- GitHub conectado a tu cuenta de Railway
+- Variable de entorno `DB_MYSQL_PASSWORD` configurada
+
+### Pasos de Deploy
+
+1. **Conectar Repositorio**
+   - En Railway, crear nuevo proyecto: `New Project`
+   - Seleccionar `Deploy from GitHub repo`
+   - Autorizar acceso y elegir repositorio `primavera`
+
+2. **Agregar MySQL**
+   - En el proyecto, hacer clic en `New`
+   - Seleccionar `Database` → `MySQL`
+   - Esperar a que se cree la instancia
+
+3. **Configurar Variables de Entorno**
+   - En el servicio de la app, ir a `Variables`
+   - Agregar:
+     ```
+     SPRING_DATASOURCE_URL=jdbc:mysql://${{MySQL.MYSQLHOST}}:${{MySQL.MYSQLPORT}}/${{MySQL.MYSQLDATABASE}}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+     SPRING_DATASOURCE_USERNAME=${{MySQL.MYSQLUSER}}
+     SPRING_DATASOURCE_PASSWORD=${{MySQL.MYSQLPASSWORD}}
+     ```
+
+4. **Desplegar**
+   - Railway detectará automáticamente que es un proyecto Maven/Java
+   - El build se ejecutará usando `./mvnw clean install`
+   - La app iniciará en el puerto asignado por Railway (variable `PORT`)
+
+5. **Verificar Deploy**
+   - Revisar `Deployments` → estado debe ser `Active`
+   - Ver logs para confirmar que Tomcat inició correctamente
+   - Acceder al URL público del servicio
+
+### Variables de Entorno en Railway
+
+| Variable | Origen | Descripción |
+|----------|--------|-------------|
+| `PORT` | Railway (automático) | Puerto asignado por Railway |
+| `SPRING_DATASOURCE_URL` | Manual (referencia MySQL) | Conexión a base de datos |
+| `SPRING_DATASOURCE_USERNAME` | Manual (referencia MySQL) | Usuario de BD |
+| `SPRING_DATASOURCE_PASSWORD` | Manual (referencia MySQL) | Contraseña de BD |
 
 ---
 
