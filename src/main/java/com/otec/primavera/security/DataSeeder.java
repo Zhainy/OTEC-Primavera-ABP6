@@ -47,7 +47,22 @@ public class DataSeeder implements CommandLineRunner {
         Usuario alumno3 = crearUsuarioSiNoExiste("Luis Perez", "luis@otec.cl", "luis123", rolAlumno);
         Usuario alumno4 = crearUsuarioSiNoExiste("Camila Rojas", "camila@otec.cl", "camila123", rolAlumno);
 
-        // 3. Cursos demo
+        // 3. Cursos demo (9 cursos del proyecto)
+        Curso cursoFullstackJava = crearCursoSiNoExiste(
+                "Bootcamp Fullstack Java & Spring Boot",
+                "Programa intensivo enfocado en la creación de aplicaciones web empresariales robustas. Cubre desde los fundamentos de programación orientada a objetos hasta la implementación de APIs RESTful, seguridad, y persistencia de datos utilizando Spring Framework y JPA.");
+        Curso cursoArquitectura = crearCursoSiNoExiste(
+                "Diplomado en Arquitectura de Software y Patrones",
+                "Formación avanzada para desarrolladores que buscan escalar sistemas complejos. Se profundiza en el diseño guiado por el dominio (DDD), microservicios, integración de bases de datos relacionales y no relacionales, y estrategias de despliegue en la nube.");
+        Curso cursoJavaScript = crearCursoSiNoExiste(
+                "Master en JavaScript Avanzado y Asincronismo",
+                "Especialización en el ecosistema de JavaScript moderno (ES6+). Los estudiantes dominarán el asincronismo profundo (Promises, async/await), el Event Loop, manipulación avanzada del DOM y los fundamentos para frameworks reactivos.");
+        Curso cursoFrontendUI = crearCursoSiNoExiste(
+                "Especialización Frontend y UI/UX Moderno",
+                "Curso centrado en la creación de interfaces de usuario excepcionales y accesibles. Integra principios de diseño interactivo con desarrollo técnico utilizando HTML semántico, CSS moderno (Grid, Flexbox, animaciones) y preprocesadores para lograr experiencias digitales memorables.");
+        Curso cursoSaaS = crearCursoSiNoExiste(
+                "Desarrollo y Despliegue de Aplicaciones SaaS",
+                "Taller práctico orientado a la creación de Software como Servicio (SaaS). Abarca desde la concepción del modelo de negocio, diseño de la base de datos multi-inquilino (multi-tenant), hasta la gestión de suscripciones, roles y autenticación segura.");
         Curso cursoJava = crearCursoSiNoExiste(
                 "Bootcamp Back-end Java",
                 "Programa intensivo de Java, Spring Boot y APIs REST.");
@@ -59,10 +74,10 @@ public class DataSeeder implements CommandLineRunner {
                 "Python, SQL y visualizacion para proyectos de analitica.");
 
         // 4. Matriculas demo para poblar dashboards
-        crearMatriculaSiNoExiste(alumnoPrincipal, cursoJava, "EN_CURSO", 45.0);
-        crearMatriculaSiNoExiste(alumno2, cursoFrontend, "APROBADO", 100.0);
+        crearMatriculaSiNoExiste(alumnoPrincipal, cursoFullstackJava, "EN_CURSO", 45.0);
+        crearMatriculaSiNoExiste(alumno2, cursoFrontendUI, "APROBADO", 100.0);
         crearMatriculaSiNoExiste(alumno3, cursoDatos, "REPROBADO", 62.0);
-        crearMatriculaSiNoExiste(alumno4, cursoJava, "EN_CURSO", 28.0);
+        crearMatriculaSiNoExiste(alumno4, cursoArquitectura, "EN_CURSO", 28.0);
     }
 
     private Usuario crearUsuarioSiNoExiste(String nombre, String email, String passwordPlano, Rol rol) {
